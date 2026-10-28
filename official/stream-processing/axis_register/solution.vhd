@@ -13,6 +13,7 @@ entity axis_register is
     s_axis_tready : out std_logic;
     s_axis_tdata  : in  std_logic_vector(DATA_WIDTH-1 downto 0);
     s_axis_tlast  : in  std_logic;
+    s_axis_tuser  : in  std_logic;
     m_axis_tvalid : out std_logic;
     m_axis_tready : in  std_logic;
     m_axis_tdata  : out std_logic_vector(DATA_WIDTH-1 downto 0);
