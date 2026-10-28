@@ -34,7 +34,7 @@ begin
   s_axis_tready <= '1' when count < DEPTH else '0';
   m_axis_tvalid <= '1' when count > 0 else '0';
   rd_cell <= std_logic_vector(mem(rd_ptr));
-  m_axis_tdata <= rd_cell(DATA_WIDTH-1 downto 1);
+  m_axis_tdata <= rd_cell(DATA_WIDTH downto 1);
   m_axis_tlast <= rd_cell(0);
 
   process (clk)
