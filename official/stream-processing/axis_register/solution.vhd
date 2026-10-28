@@ -33,6 +33,7 @@ begin
     if rising_edge(clk) then
       if rst = '1' then
         tvalid <= '0';
+        -- m_axis_tuser <= '0';
       else
         if s_axis_tready = '1' then
           m_axis_tdata <= s_axis_tdata;
