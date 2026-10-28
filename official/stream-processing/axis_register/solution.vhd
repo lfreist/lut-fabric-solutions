@@ -13,11 +13,12 @@ entity axis_register is
     s_axis_tready : out std_logic;
     s_axis_tdata  : in  std_logic_vector(DATA_WIDTH-1 downto 0);
     s_axis_tlast  : in  std_logic;
-    s_axis_tuser  : in  std_logic;
+    -- s_axis_tuser  : in  std_logic;
     m_axis_tvalid : out std_logic;
     m_axis_tready : in  std_logic;
     m_axis_tdata  : out std_logic_vector(DATA_WIDTH-1 downto 0);
     m_axis_tlast  : out std_logic
+    -- m_axis_tuser  : out std_logic
   );
 end entity axis_register;
 
@@ -37,6 +38,7 @@ begin
           m_axis_tdata <= s_axis_tdata;
           tvalid <= s_axis_tvalid;
           m_axis_tlast <= s_axis_tlast;
+          -- m_axis_tuser <= s_axis_tuser;
         end if;
       end if;
     end if;
