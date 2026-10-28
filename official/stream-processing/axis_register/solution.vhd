@@ -23,17 +23,18 @@ end entity axis_register;
 architecture rtl of axis_register is
   signal tvalid : std_logic := '0';
 begin
+  m_axis_tvalid <= tvalid;
   s_axis_tready <= m_axis_tready or not tvalid;
 
   process (clk)
   begin
     if rising_edge(clk) then
       if rst = '1' then
-        m_axis_tvalid <= '0';
+        tvalid <= '0';
       else
         if s_axis_tready = '1' then
           m_axis_tdata <= s_axis_tdata;
-          m_axis_tvalid <= s_axis_tvalid;
+          tvalid <= s_axis_tvalid;
           m_axis_tlast <= s_axis_tlast;
         end if;
       end if;
