@@ -64,8 +64,8 @@ begin
             rd_ptr <= rd_ptr + 1;
           end if;
         end if;
+        cnt <= c;
       end if;
-      cnt <= c;
     end if;
   end process;
 end architecture rtl;
