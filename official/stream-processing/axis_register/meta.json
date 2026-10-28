@@ -1,0 +1,10 @@
+{
+  "state": "failed",
+  "submitted_at": "2026-10-28T12:27:29+00:00",
+  "tree_hash": "2707d8d9e343277c0b51f06986572f168ec8420b",
+  "source_commit": null,
+  "entity": "axis_register",
+  "language": "vhdl",
+  "dep_mode": "own",
+  "accepted": null
+}
