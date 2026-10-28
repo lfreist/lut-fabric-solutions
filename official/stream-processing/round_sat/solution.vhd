@@ -6,7 +6,7 @@ entity round_sat is
   generic (
     IN_WIDTH  : positive := 40;
     OUT_WIDTH : positive := 16;
-    SHIFT     : natural := 15
+    SHIFT     : natural  := 15
   );
   port (
     d   : in  signed(IN_WIDTH-1 downto 0);
@@ -16,36 +16,30 @@ entity round_sat is
 end entity round_sat;
 
 architecture rtl of round_sat is
-  constant W : positive := IN_WIDTH + 1;
-
-  function half_lsb return signed is
-  begin
-    if SHIFT = 0 then
-      return to_signed(0, W);
-    else
-      return shift_left(to_signed(1, W), SHIFT - 1);
-    end if;
-  end function;
-
-  constant HALF : signed(W-1 downto 0) := half_lsb;
+  -- wide enough for d + half and for both output limits
+  constant WW : positive := IN_WIDTH + OUT_WIDTH + 1;
+  constant MAX_OUT : signed(WW-1 downto 0) := shift_left(to_signed(1, WW), OUT_WIDTH - 1) - 1;
+  constant MIN_OUT : signed(WW-1 downto 0) := -shift_left(to_signed(1, WW), OUT_WIDTH - 1);
 begin
-  process (d)
-    variable r : signed(W-1 downto 0);
-  begin
-    r := shift_right(resize(d, W) + HALF, SHIFT);   -- round half up
 
-    if OUT_WIDTH >= W then
-      q   <= resize(r, OUT_WIDTH);                  -- always fits: sign-extend
-      sat <= '0';
-    elsif resize(resize(r, OUT_WIDTH), W) = r then  -- survives the round trip
-      q   <= resize(r, OUT_WIDTH);
-      sat <= '0';
-    elsif r(W-1) = '1' then                         -- too negative
-      q   <= (OUT_WIDTH-1 => '1', others => '0');
+  process (d)
+    variable t : signed(WW-1 downto 0);
+  begin
+    t := resize(d, WW);
+    if SHIFT > 0 then
+      t := t + shift_left(to_signed(1, WW), SHIFT - 1);  -- add half an LSB
+      t := shift_right(t, SHIFT);                         -- arithmetic shift = floor
+    end if;
+    if t > MAX_OUT then
+      q   <= resize(MAX_OUT, OUT_WIDTH);
       sat <= '1';
-    else                                            -- too positive
-      q   <= (OUT_WIDTH-1 => '0', others => '1');
+    elsif t < MIN_OUT then
+      q   <= resize(MIN_OUT, OUT_WIDTH);
       sat <= '1';
+    else
+      q   <= resize(t, OUT_WIDTH);
+      sat <= '0';
     end if;
   end process;
+
 end architecture rtl;
