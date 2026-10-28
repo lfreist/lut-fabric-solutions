@@ -38,8 +38,10 @@ begin
   m_axis_tlast <= rd_cell(0);
 
   process (clk)
+    variable c : natural range 0 to DEPTH;
   begin
     if rising_edge(clk) then
+      c := cnt;
       if rst = '1' then
         wr_ptr <= 0;
         rd_ptr <= 0;
@@ -47,28 +49,23 @@ begin
       else
         if s_axis_tvalid = '1' and s_axis_tready = '1' then
           mem(wr_ptr) <= s_axis_tdata & s_axis_tlast;
-          cnt <= cnt + 1;
-          if m_axis_tvalid = '1' and m_axis_tready = '1' then
+          c := c + 1;
+          if wr_ptr = DEPTH-1 then
+            wr_ptr <= 0;
           else
-            if wr_ptr = DEPTH-1 then
-              wr_ptr <= 0;
-            else
-              wr_ptr <= wr_ptr + 1;
-            end if;
+            wr_ptr <= wr_ptr + 1;
           end if;
         end if;
         if m_axis_tvalid = '1' and m_axis_tready = '1' then
-          cnt <= cnt - 1;
-          if s_axis_tvalid = '1' and s_axis_tready = '1' then
+          c := c - 1;
+          if rd_ptr = DEPTH-1 then
+            rd_ptr <= 0;
           else
-            if rd_ptr = DEPTH-1 then
-              rd_ptr <= 0;
-            else
-              rd_ptr <= rd_ptr + 1;
-            end if;
+            rd_ptr <= rd_ptr + 1;
           end if;
         end if;
       end if;
+      cnt <= c;
     end if;
   end process;
 end architecture rtl;
