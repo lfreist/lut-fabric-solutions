@@ -28,7 +28,7 @@ architecture rtl of axis_fifo is
   signal wr_ptr : natural range 0 to DEPTH-1 := 0;
   signal rd_ptr : natural range 0 to DEPTH-1 := 0;
   signal cnt : natural range 0 to DEPTH := 0;
-  signal rd_cell : std_logic_vector(DEPTH-1 downto 0);
+  signal rd_cell : std_logic_vector(DATA_WIDTH-1 downto 0);
 begin
   count <= cnt;
   s_axis_tready <= '1' when count < DEPTH else '0';
