@@ -39,8 +39,10 @@ begin
         when S_101 => next_state <= S_1011 when din = '1' else S_10;
         when S_1011 => next_state <= S_1 when din = '1' else S_10;
       end case;
-    elsif state = S_1011 then
-      next_state <= S_1;
+    else
+      if state = S_1011 then
+        next_state <= S_1;
+      end if;
     end if;
   end process;
 
