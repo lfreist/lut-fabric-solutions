@@ -23,6 +23,8 @@ begin
   begin
     if rising_edge(clk) then
       if rst = '1' then
+        busy <= '0';
+        done <= '0';
         remaining <= (others => '0');
       elsif start = '1' then
         remaining <= unsigned(len);
