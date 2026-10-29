@@ -1,0 +1,10 @@
+{
+  "state": "failed",
+  "submitted_at": "2026-10-29T09:18:11+00:00",
+  "tree_hash": "ec517449e7929b867bef9069593a17ae2ec32762",
+  "source_commit": null,
+  "entity": "comparator",
+  "language": "vhdl",
+  "dep_mode": "own",
+  "accepted": null
+}
