@@ -1,10 +1,19 @@
 {
-  "state": "failed",
-  "submitted_at": "2026-10-29T12:16:41+00:00",
+  "state": "passed",
+  "submitted_at": "2026-10-29T12:17:02+00:00",
   "tree_hash": "f7a8d88a02d159f8927bad37d6098de7072fe958",
   "source_commit": null,
   "entity": "alu_4bit",
   "language": "vhdl",
   "dep_mode": "own",
-  "accepted": null
+  "accepted": {
+    "blob": "1a267db24e60cc8087c78148c358efe13071bf5d",
+    "tree_hash": "f7a8d88a02d159f8927bad37d6098de7072fe958",
+    "source_commit": null,
+    "dep_mode": "own",
+    "first_accepted_at": "2026-10-29T12:17:02+00:00",
+    "accepted_at": "2026-10-29T12:17:02+00:00",
+    "revision": 1,
+    "sim_time": "100 us"
+  }
 }

@@ -61,13 +61,7 @@ begin
       y => min
     );
 
-  u_slt : entity work.mux2
-    generic map (WIDTH => 4)
-    port map (
-      a => "0001", b => "0000",
-      sel => gt,
-      y => slt
-    );
+  slt <= "000" & lt;
   
   u_logic : entity work.logic_unit
     generic map (
