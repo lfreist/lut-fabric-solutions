@@ -1,0 +1,10 @@
+{
+  "state": "failed",
+  "submitted_at": "2026-10-29T14:22:31+00:00",
+  "tree_hash": "b357d26c3229a2154e7eabc173846c6d10d10980",
+  "source_commit": null,
+  "entity": "timer",
+  "language": "vhdl",
+  "dep_mode": "own",
+  "accepted": null
+}
