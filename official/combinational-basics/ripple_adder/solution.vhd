@@ -29,5 +29,5 @@ begin
       );
   end generate;
   cins(0) <= cin;
-  cout <= cins(WIDTH-1);
+  cout <= cins(WIDTH);
 end architecture rtl;

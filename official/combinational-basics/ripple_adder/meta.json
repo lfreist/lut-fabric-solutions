@@ -1,10 +1,19 @@
 {
-  "state": "failed",
-  "submitted_at": "2026-10-29T10:11:07+00:00",
+  "state": "passed",
+  "submitted_at": "2026-10-29T10:11:32+00:00",
   "tree_hash": "f75832d3202d60a877922c444c3a702804f8115f",
   "source_commit": null,
   "entity": "ripple_adder",
   "language": "vhdl",
   "dep_mode": "own",
-  "accepted": null
+  "accepted": {
+    "blob": "343375a396a11a047e2fa9f8602e9db07ccb0875",
+    "tree_hash": "f75832d3202d60a877922c444c3a702804f8115f",
+    "source_commit": null,
+    "dep_mode": "own",
+    "first_accepted_at": "2026-10-29T10:11:32+00:00",
+    "accepted_at": "2026-10-29T10:11:32+00:00",
+    "revision": 1,
+    "sim_time": "100 us"
+  }
 }
