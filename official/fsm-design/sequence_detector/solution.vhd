@@ -33,8 +33,8 @@ begin
     next_state <= state;
     if din_valid = '1' then
       case state is
-        when S_IDLE => next_state <= S_1 when din = '1' else S_IDLE;
-        when S_1 => next_state <= S_10 when din = '0' else S_IDLE;
+        when S_IDLE => next_state <= S_1 when din = '1';
+        when S_1 => next_state <= S_10 when din = '0';
         when S_10 => next_state <= S_101 when din = '1' else S_IDLE;
         when S_101 => next_state <= S_1011 when din = '1' else S_10;
         when S_1011 => next_state <= S_1 when din = '1' else S_10;
