@@ -38,7 +38,7 @@ begin
     port map (
       a => c,
       b => d,
-      sel => sel(1),
+      sel => sel(0),
       y => o1
     );
 
@@ -49,7 +49,7 @@ begin
     port map (
       a => o0,
       b => o1,
-      sel => sel(2),
+      sel => sel(1),
       y => y
     );
 end architecture rtl;
