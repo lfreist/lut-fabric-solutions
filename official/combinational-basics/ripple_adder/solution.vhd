@@ -16,7 +16,7 @@ entity ripple_adder is
 end entity ripple_adder;
 
 architecture rtl of ripple_adder is
-  signal cins : std_logic_vector(WIDTH downto 0) := (others => cin);
+  signal cins : std_logic_vector(WIDTH downto 0);
 begin
   gen_bit_adder : for i in 0 to WIDTH-1 generate
     u_adder : entity work.full_adder
@@ -28,5 +28,6 @@ begin
         cout => cins(i+1)
       );
   end generate;
+  cins(0) <= cin;
   cout <= cins(WIDTH-1);
 end architecture rtl;
