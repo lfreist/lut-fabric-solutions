@@ -17,11 +17,11 @@ entity comparator is
 end entity comparator;
 
 architecture rtl of comparator is
-  function cmp(
+  function is_gt(
     i_a: std_logic_vector(WIDTH-1 downto 0);
     i_b: std_logic_vector(WIDTH-1 downto 0);
     i_is_signed: std_logic
-  ) return std_logic is
+  ) return boolean is
   begin
     if i_is_signed = '1' then
       return signed(i_a) > signed(i_b);
@@ -31,6 +31,6 @@ architecture rtl of comparator is
   end function;
 begin
   eq <= '1' when unsigned(a) = unsigned(b) else '0';
-  gt <= '1' when eq = '0' and cmp(a, b, is_signed) = '1' else '0';
+  gt <= '1' when eq = '0' and is_gt(a, b, is_signed) else '0';
   lt <= not gt;
 end architecture rtl;
