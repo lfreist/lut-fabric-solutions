@@ -35,7 +35,7 @@ begin
     port map (
       a => a,
       b => b_add,
-      cin => '0',
+      cin => op(0),
       sum => sum,
       cout => c
     );
