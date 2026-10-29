@@ -65,7 +65,7 @@ begin
     generic map (WIDTH => 4)
     port map (
       a => "0001", b => "0000",
-      sel => lt,
+      sel => gt,
       y => slt
     );
   
