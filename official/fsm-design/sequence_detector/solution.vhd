@@ -37,7 +37,7 @@ begin
         when S_1 => next_state <= S_10 when din = '0' else S_IDLE;
         when S_10 => next_state <= S_101 when din = '1' else S_1;
         when S_101 => next_state <= S_1011 when din = '1' else S_1;
-        when S_1011 => next_state <= S_1 when din = '1' else S_IDLE;
+        when S_1011 => next_state <= S_1 when din = '1' else S_10;
       end case;
     end if;
   end process;
