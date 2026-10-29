@@ -14,6 +14,6 @@ end entity half_adder;
 architecture rtl of half_adder is
 
 begin
-  sum <= a or b;
+  sum <= a xor b;
   carry <= a and b;
 end architecture rtl;
