@@ -32,5 +32,5 @@ architecture rtl of comparator is
 begin
   eq <= '1' when unsigned(a) = unsigned(b) else '0';
   gt <= '1' when eq = '0' and is_gt(a, b, is_signed) else '0';
-  lt <= not gt;
+  lt <= not gt and not eq;
 end architecture rtl;
