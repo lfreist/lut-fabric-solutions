@@ -32,7 +32,7 @@ begin
           case state is
             when LOW => state <= LOW;
             when EDGE => state <= LOW;
-            when HIGH => state <= EDGE;
+            when HIGH => state <= LOW;
           end case;
         end if;
       end if;
