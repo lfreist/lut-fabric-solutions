@@ -16,7 +16,7 @@ end entity alu_4bit;
 
 architecture rtl of alu_4bit is
   signal b_add : std_logic_vector(3 downto 0);
-  signal sum : std_logic_vector(4 downto 0);
+  signal sum : std_logic_vector(3 downto 0);
   signal c : std_logic;
   signal lt, gt : std_logic;
   signal min : std_logic_vector(3 downto 0);
