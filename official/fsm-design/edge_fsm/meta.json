@@ -1,0 +1,10 @@
+{
+  "state": "failed",
+  "submitted_at": "2026-10-29T13:29:13+00:00",
+  "tree_hash": "5b0dfeb72ff202d786879b9a46a893bbeecaf105",
+  "source_commit": null,
+  "entity": "edge_fsm",
+  "language": "vhdl",
+  "dep_mode": "own",
+  "accepted": null
+}
