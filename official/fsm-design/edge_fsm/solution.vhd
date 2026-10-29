@@ -29,11 +29,7 @@ begin
             when HIGH => state <= HIGH;
           end case;
         else
-          case state is
-            when LOW => state <= LOW;
-            when EDGE => state <= LOW;
-            when HIGH => state <= LOW;
-          end case;
+          state <= LOW;
         end if;
       end if;
     end if;
