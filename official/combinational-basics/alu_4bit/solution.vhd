@@ -25,7 +25,7 @@ architecture rtl of alu_4bit is
   signal arith : std_logic_vector(3 downto 0);
   signal y_int : std_logic_vector(3 downto 0);
 begin
-  b_add <= b xor (b'length => op(0));
+  b_add <= b xor (b'range => op(0));
 
   -- add/sub
   u_adder : entity work.ripple_adder
