@@ -1,0 +1,10 @@
+{
+  "state": "failed",
+  "submitted_at": "2026-10-29T10:00:34+00:00",
+  "tree_hash": "86fb8210c127a4893960ad1c8b685828bd0dcc37",
+  "source_commit": null,
+  "entity": "mux4",
+  "language": "vhdl",
+  "dep_mode": "own",
+  "accepted": null
+}
