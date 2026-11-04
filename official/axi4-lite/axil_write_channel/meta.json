@@ -1,0 +1,19 @@
+{
+  "state": "passed",
+  "submitted_at": "2026-10-23T12:20:53+00:00",
+  "tree_hash": "c42270134cf673ba9e604fb55394b598f79fd2a1",
+  "source_commit": null,
+  "entity": "axil_write_channel",
+  "language": "vhdl",
+  "dep_mode": "own",
+  "accepted": {
+    "blob": "0af3693aa5ffc9b10d4427512990ea87ea26d2c8",
+    "tree_hash": "c42270134cf673ba9e604fb55394b598f79fd2a1",
+    "source_commit": null,
+    "dep_mode": "own",
+    "first_accepted_at": "2026-10-23T12:20:53+00:00",
+    "accepted_at": "2026-10-23T12:20:53+00:00",
+    "revision": 1,
+    "sim_time": "200 us"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "state": "passed",
+  "submitted_at": "2026-10-23T10:30:14+00:00",
+  "tree_hash": "4a2cb9f62f02d43f230c719f95ad73978bb18a58",
+  "source_commit": null,
+  "entity": "strb_register",
+  "language": "vhdl",
+  "dep_mode": "own",
+  "accepted": {
+    "blob": "825923f1fc4049d3b8445f9df733a4363171b0d2",
+    "tree_hash": "4a2cb9f62f02d43f230c719f95ad73978bb18a58",
+    "source_commit": null,
+    "dep_mode": "own",
+    "first_accepted_at": "2026-10-23T10:28:49+00:00",
+    "accepted_at": "2026-10-23T10:30:14+00:00",
+    "revision": 2,
+    "sim_time": "100 us"
+  }
+}
