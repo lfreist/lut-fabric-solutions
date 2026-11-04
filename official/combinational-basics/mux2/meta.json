@@ -1,0 +1,19 @@
+{
+  "state": "passed",
+  "submitted_at": "2026-10-29T08:48:44+00:00",
+  "tree_hash": "aff005d11f93ea7ef90211f61a2f2708eb0664b4",
+  "source_commit": null,
+  "entity": "mux2",
+  "language": "vhdl",
+  "dep_mode": "own",
+  "accepted": {
+    "blob": "31fbc348a5d3acf664a91a754f0337ab4b4a1ec4",
+    "tree_hash": "aff005d11f93ea7ef90211f61a2f2708eb0664b4",
+    "source_commit": null,
+    "dep_mode": "own",
+    "first_accepted_at": "2026-10-29T08:48:44+00:00",
+    "accepted_at": "2026-10-29T08:48:44+00:00",
+    "revision": 1,
+    "sim_time": "50 us"
+  }
+}
