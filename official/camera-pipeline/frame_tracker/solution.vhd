@@ -35,8 +35,8 @@ architecture rtl of frame_tracker is
   signal r_frame_done : std_logic := '0';
   signal r_out_eol : std_logic := '0';
   signal r_out_sof : std_logic := '0';
-  signal r_out_x : unsigned(COORD_W-1 downto 0);
-  signal r_out_y : unsigned(COORD_W-1 downto 0);
+  signal r_out_x : unsigned(COORD_W-1 downto 0) := (others => '0');
+  signal r_out_y : unsigned(COORD_W-1 downto 0) := (others => '0');
   signal r_out_data : std_logic_vector(PIX_W-1 downto 0);
   signal r_out_valid : std_logic := '0';
   signal r_width : unsigned(COORD_W-1 downto 0);
