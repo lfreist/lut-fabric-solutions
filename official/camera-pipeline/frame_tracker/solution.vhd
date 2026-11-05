@@ -73,7 +73,7 @@ begin
         end if;
         if v_in_frame and r_frame_done = '0' then
           r_out_valid <= '1';
-          if r_out_eol then
+          if r_out_eol and not s_axis_tuser then
             r_out_x <= (others => '0');
             r_out_y <= r_out_y + 1;
             if r_out_y = r_height-1 then
