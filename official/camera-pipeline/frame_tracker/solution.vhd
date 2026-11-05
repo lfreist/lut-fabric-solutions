@@ -83,7 +83,7 @@ begin
             r_in_frame <= '0';
             r_out_valid <= '0';
           else
-            if s_axis_tlast = '1' and r_out_x = r_width-2 then
+            if s_axis_tlast = '1' and r_out_x = r_width-1 then
               if r_out_y = r_height-1 then
                 r_frame_done <= '1';
               else
