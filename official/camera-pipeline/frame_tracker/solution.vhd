@@ -55,12 +55,12 @@ begin
       r_out_y <= (others => '0');
       r_in_frame <= '0';
       r_out_data <= s_axis_tdata(PIX_W-1 downto 0);
+      if r_in_frame = '0' then
+        r_width <= unsigned(width);
+        r_height <= unsigned(height);
+      end if;
       if rst = '1' then
       elsif s_axis_tvalid = '1' then
-        if r_in_frame = '0' then
-          r_width <= unsigned(width);
-          r_height <= unsigned(height);
-        end if;
         if s_axis_tuser = '1' then
           if r_in_frame = '1' then
             r_err <= '1';
@@ -83,7 +83,7 @@ begin
             r_out_eol <= '1';
           elsif s_axis_tlast = '1' then -- width not reached!
             r_err <= '1';
-            --r_in_frame <= '0';
+            r_in_frame <= '0';
           else
             r_out_x <= r_out_x + 1;
           end if;
