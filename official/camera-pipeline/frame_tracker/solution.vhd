@@ -86,6 +86,7 @@ begin
             r_out_valid <= '0';
           else
             if s_axis_tlast = '1' and r_out_x = r_width-1 then r_out_eol <= '1'; end if;
+            r_out_valid <= '1';
             r_out_x <= r_out_x + 1;
           end if;
         end if;
