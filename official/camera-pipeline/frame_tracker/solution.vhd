@@ -84,7 +84,7 @@ begin
             r_err <= '1';
             v_in_frame := false;
             r_out_valid <= '0';
-          else
+          elsif r_in_frame then
             if s_axis_tlast = '1' and r_out_x = r_width-2 then
               if r_out_y = r_height-1 then
                 r_frame_done <= '1';
