@@ -80,7 +80,7 @@ begin
               r_out_y <= (others => '0');
               r_frame_done <= '1';
             end if;
-          elsif (s_axis_tlast = '1' and r_out_x < r_width-2) or (s_axis_tlast = '0' and r_out_x = r_width-2 and s_axis_tuser = '0') then
+          elsif (s_axis_tlast = '1' and r_out_x < r_width-2) or (s_axis_tlast = '0' and r_out_x = r_width-2 and s_axis_tuser = '1') then
             r_err <= '1';
             v_in_frame := false;
             r_out_valid <= '0';
