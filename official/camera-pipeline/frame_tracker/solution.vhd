@@ -91,6 +91,7 @@ begin
       else
         r_out_x <= r_out_x;
         r_out_y <= r_out_y;
+        r_out_eol <= r_out_eol;
         r_in_frame <= r_in_frame;
       end if;
     end if;
