@@ -94,8 +94,6 @@ begin
             end if;
             r_out_valid <= '1';
             r_out_x <= r_out_x + 1;
-          else
-            r_out_valid <= r_out_valid;
           end if;
         end if;
         r_in_frame <= '1' when v_in_frame else '0';
