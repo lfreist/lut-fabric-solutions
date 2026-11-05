@@ -91,6 +91,7 @@ begin
         r_out_x <= r_out_x;
         r_out_y <= r_out_y;
         r_in_frame <= r_in_frame;
+        r_out_valid <= r_out_valid;
       end if;
     end if;
   end process;
