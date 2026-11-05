@@ -79,7 +79,6 @@ begin
             if r_out_y = r_height-1 then
               r_out_y <= (others => '0');
               r_frame_done <= '1';
-              r_in_frame <= '0';
             end if;
             r_out_eol <= '1';
           elsif s_axis_tlast = '1' then -- width not reached!
