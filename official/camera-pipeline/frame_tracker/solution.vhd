@@ -44,6 +44,7 @@ architecture rtl of frame_tracker is
 begin
   
   process (clk)
+    variable v_in_frame : boolean := false;
   begin
     if rising_edge(clk) then
       r_out_valid <= '0';
@@ -57,19 +58,20 @@ begin
         r_width <= unsigned(width);
         r_height <= unsigned(height);
       end if;
+      v_in_frame := r_in_frame = '1';
       if rst = '1' then
       elsif s_axis_tvalid = '1' then
         if s_axis_tuser = '1' then
-          if r_in_frame = '1' then
+          if v_in_frame then
             r_err <= '1';
           end if;
           r_out_x <= (others => '0');
           r_out_y <= (others => '0');
-          r_in_frame <= '1';
+          v_in_frame := true;
           r_out_sof <= '1';
           r_out_valid <= '1';
-        elsif r_in_frame = '1' and r_frame_done = '0' then
-          r_in_frame <= '1';
+        end if;
+        if v_in_frame and r_frame_done = '0' then
           r_out_valid <= '1';
           if r_out_eol then
             r_out_x <= (others => '0');
@@ -80,13 +82,13 @@ begin
             end if;
           elsif (s_axis_tlast = '1' and r_out_x < r_width-2) or (s_axis_tlast = '0' and r_out_x = r_width-2) then
             r_err <= '1';
-            r_in_frame <= '0';
+            v_in_frame := '0';
             r_out_valid <= '0';
           else
             if s_axis_tlast = '1' and r_out_x = r_width-2 then
               if r_out_y = r_height-1 then
                 r_frame_done <= '1';
-                r_in_frame <= '0';
+                v_in_frame := '0';
               end if;
               r_out_eol <= '1';
             end if;
@@ -94,6 +96,7 @@ begin
             r_out_x <= r_out_x + 1;
           end if;
         end if;
+        r_in_frame <= '1' when v_in_frame else '0';
       else
         r_out_x <= r_out_x;
         r_out_y <= r_out_y;
