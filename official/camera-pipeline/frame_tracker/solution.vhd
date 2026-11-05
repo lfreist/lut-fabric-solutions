@@ -87,7 +87,10 @@ begin
             r_out_x <= r_out_x + 1;
           end if;
         end if;
-
+      else
+        r_out_x <= r_out_x;
+        r_out_y <= r_out_y;
+        r_in_frame <= r_in_frame;
       end if;
     end if;
   end process;
