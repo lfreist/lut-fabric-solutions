@@ -83,7 +83,7 @@ begin
             r_out_eol <= '1';
           elsif s_axis_tlast = '1' then -- width not reached!
             r_err <= '1';
-            r_in_frame <= '0';
+            --r_in_frame <= '0';
           else
             r_out_x <= r_out_x + 1;
           end if;
