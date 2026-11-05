@@ -64,13 +64,12 @@ begin
         if s_axis_tuser = '1' then
           if r_in_frame = '1' then
             r_err <= '1';
-          else
-            r_out_x <= (others => '0');
-            r_out_y <= (others => '0');
-            r_in_frame <= '1';
-            r_out_valid <= '1';
-            r_out_sof <= '1';
           end if;
+          r_out_x <= (others => '0');
+          r_out_y <= (others => '0');
+          r_in_frame <= '1';
+          r_out_valid <= '1';
+          r_out_sof <= '1';
         elsif r_in_frame = '1' then
           r_in_frame <= '1';
           if s_axis_tlast = '1' and r_out_x = r_width-1 then
