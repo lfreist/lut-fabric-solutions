@@ -76,16 +76,19 @@ begin
             r_out_sof <= '1';
           end if;
         elsif r_in_frame = '1' then
+          r_in_frame <= '1';
           if s_axis_tlast = '1' and r_out_x = r_width-1 then
             r_out_x <= (others => '0');
             r_out_y <= r_out_y + 1;
             if r_out_y = r_height-1 then
               r_out_y <= (others => '0');
               r_frame_done <= '1';
+              r_in_frame <= '0';
             end if;
             r_out_eol <= '1';
           elsif s_axis_tlast = '1' then -- width not reached!
             r_err <= '1';
+            r_in_frame <= '0';
           else
             r_out_x <= r_out_x + 1;
           end if;
