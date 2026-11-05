@@ -80,12 +80,12 @@ begin
               r_out_y <= (others => '0');
               r_frame_done <= '1';
             end if;
-          elsif (s_axis_tlast = '1' and r_out_x < r_width-1) or (s_axis_tlast = '0' and r_out_x = r_width-1) then
+          elsif (s_axis_tlast = '1' and r_out_x < r_width-2) or (s_axis_tlast = '0' and r_out_x = r_width-2) then
             r_err <= '1';
             r_in_frame <= '0';
             r_out_valid <= '0';
           else
-            if s_axis_tlast = '1' and r_out_x = r_width-1 then r_out_eol <= '1'; end if;
+            if s_axis_tlast = '1' and r_out_x = r_width-2 then r_out_eol <= '1'; end if;
             r_out_valid <= '1';
             r_out_x <= r_out_x + 1;
           end if;
