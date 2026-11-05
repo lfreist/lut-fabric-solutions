@@ -46,7 +46,7 @@ begin
   process (clk)
   begin
     if rising_edge(clk) then
-      r_out_valid <= s_axis_tvalid;
+      r_out_valid <= '1' when s_axis_tvalid = '1' and r_in_frame = '1' else '0';
       r_err <= '0';
       r_frame_done <= '0';
       r_out_sof <= '0';
