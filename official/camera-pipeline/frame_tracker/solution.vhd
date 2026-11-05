@@ -61,7 +61,6 @@ begin
       end if;
       if rst = '1' then
       elsif s_axis_tvalid = '1' then
-        r_out_valid <= '1';
         if s_axis_tuser = '1' then
           if r_in_frame = '1' then
             r_err <= '1';
@@ -70,8 +69,10 @@ begin
           r_out_y <= (others => '0');
           r_in_frame <= '1';
           r_out_sof <= '1';
+          r_out_valid <= '1';
         elsif r_in_frame = '1' and r_frame_done = '0' then
           r_in_frame <= '1';
+          r_out_valid <= '1';
           if s_axis_tlast = '1' and r_out_x = r_width-1 then
             r_out_x <= (others => '0');
             r_out_y <= r_out_y + 1;
