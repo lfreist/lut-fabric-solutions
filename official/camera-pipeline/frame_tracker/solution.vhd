@@ -70,7 +70,7 @@ begin
           r_in_frame <= '1';
           r_out_valid <= '1';
           r_out_sof <= '1';
-        elsif r_in_frame = '1' then
+        elsif r_in_frame = '1' and r_frame_done = '0' then
           r_in_frame <= '1';
           if s_axis_tlast = '1' and r_out_x = r_width-1 then
             r_out_x <= (others => '0');
