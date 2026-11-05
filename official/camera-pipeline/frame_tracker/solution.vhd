@@ -53,16 +53,11 @@ begin
       r_frame_done <= '0';
       r_out_sof <= '0';
       r_out_eol <= '0';
+      r_out_x <= (others => '0');
+      r_out_y <= (others => '0');
+      r_in_frame <= '0';
       r_out_data <= s_axis_tdata;
       if rst = '1' then
-        r_in_frame <= '0';
-        r_err <= '0';
-        r_frame_done <= '0';
-        r_out_eol <= '0';
-        r_out_sof <= '0';
-        r_out_x <= (others => '0');
-        r_out_y <= (others => '0');
-        r_out_valid <= '0';
       elsif s_axis_tvalid = '1' then
         v_frame_start := s_axis_tuser = '1';
         v_frame_end := s_axis_tlast = '1';
@@ -91,8 +86,6 @@ begin
             r_out_eol <= '1';
           elsif s_axis_tlast = '1' then -- width not reached!
             r_err <= '1';
-            r_in_frame <= '0';
-            r_out_valid <= '0';
           else
             r_out_x <= r_out_x + 1;
           end if;
