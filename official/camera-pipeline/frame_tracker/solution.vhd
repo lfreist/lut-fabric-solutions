@@ -51,8 +51,6 @@ begin
       r_frame_done <= '0';
       r_out_sof <= '0';
       r_out_eol <= '0';
-      r_out_x <= (others => '0');
-      r_out_y <= (others => '0');
       r_in_frame <= '0';
       r_out_data <= s_axis_tdata(PIX_W-1 downto 0);
       if r_in_frame = '0' then
