@@ -56,7 +56,7 @@ begin
       r_out_x <= (others => '0');
       r_out_y <= (others => '0');
       r_in_frame <= '0';
-      r_out_data <= s_axis_tdata;
+      r_out_data <= s_axis_tdata(PIX_W-1 downto 0);
       if rst = '1' then
       elsif s_axis_tvalid = '1' then
         v_frame_start := s_axis_tuser = '1';
