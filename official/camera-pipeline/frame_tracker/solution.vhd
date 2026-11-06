@@ -87,8 +87,7 @@ begin
               if r_out_y = r_height-2 then -- end of frame
                 r_frame_done <= '1';
               end if;
-            end if;
-            if r_out_x = r_width-2 and s_axis_tlast = '1' then -- eol computed and received match
+            elsif r_out_x = r_width-2 and s_axis_tlast = '1' then -- eol computed and received match
               r_out_eol <= '1';
             elsif r_out_x = r_width-2 xor s_axis_tlast = '1' then -- eol computed and received do not match
               r_err <= '1';
