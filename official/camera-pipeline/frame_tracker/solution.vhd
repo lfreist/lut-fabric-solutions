@@ -69,6 +69,7 @@ begin
               r_out_eol <= '1';
               if r_height = 1 then -- end of frame
                 r_frame_done <= '1';
+                r_in_frame <= '0';
               else
                 r_out_y <= r_out_y + 1;
               end if;
@@ -88,6 +89,7 @@ begin
               r_out_eol <= '1';
               if r_out_y = r_height-1 then -- end of frame
                 r_frame_done <= '1';
+                r_in_frame <= '0';
               end if;
             elsif r_out_x = r_width-2 xor s_axis_tlast = '1' then -- eol computed and received do not match
               r_err <= '1';
