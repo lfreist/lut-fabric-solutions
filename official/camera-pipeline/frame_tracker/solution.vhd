@@ -44,7 +44,6 @@ architecture rtl of frame_tracker is
 begin
   
   process (clk)
-    variable v_frame_done : boolean := false;
   begin
     if rising_edge(clk) then
       r_in_frame <= '0';
@@ -103,7 +102,7 @@ begin
         else -- keep state
           r_in_frame <= r_in_frame;
           r_out_data <= r_out_data;
-          if not r_in_frame then
+          if r_in_frame = '0' then
             r_width <= unsigned(width);
             r_height <= unsigned(height);
           end if;
