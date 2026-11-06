@@ -85,7 +85,7 @@ begin
                 r_out_valid <= '0';
                 r_in_frame <= '0';
             end if;
-          else -- r_out_x and r_out_y are legit
+          elsif r_in_frame then -- r_out_x and r_out_y are legit
             r_out_x <= r_out_x + 1;
             if r_out_x = r_width-2 and s_axis_tlast = '1' then -- eol computed and received match
               r_out_eol <= '1';
