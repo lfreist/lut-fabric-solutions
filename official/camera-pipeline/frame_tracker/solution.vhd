@@ -87,6 +87,7 @@ begin
               r_out_valid <= '0';
             else
               r_next_x <= to_unsigned(v_x+1, COORD_W);
+              r_next_y <= to_unsigned(v_y, COORD_W);
             end if;
             out_x <= std_logic_vector(to_unsigned(v_x, COORD_W));
             out_y <= std_logic_vector(to_unsigned(v_y, COORD_W));
