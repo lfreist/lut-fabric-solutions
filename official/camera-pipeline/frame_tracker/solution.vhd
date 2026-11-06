@@ -69,22 +69,24 @@ begin
             v_x := to_integer(r_next_x);
             v_y := to_integer(r_next_y);
           end if;
-          if v_x = to_integer(r_width)-1 and s_axis_tlast = '1' then
-            r_out_eol <= '1';
-            r_next_y <= r_next_y + 1;
-            r_next_x <= (others => '0');
-            if v_y = to_integer(r_height)-1 then
-              r_frame_done <= '1';
+          if r_in_frame = '1' or s_axis_tuser = '1' then
+            if v_x = to_integer(r_width)-1 and s_axis_tlast = '1' then
+              r_out_eol <= '1';
+              r_next_y <= r_next_y + 1;
+              r_next_x <= (others => '0');
+              if v_y = to_integer(r_height)-1 then
+                r_frame_done <= '1';
+                r_in_frame <= '0';
+              end if;
+            elsif v_x = to_integer(r_width)-1 xor s_axis_tlast = '1' then
+              r_err <= '1';
               r_in_frame <= '0';
+            else
+              r_next_x <= to_unsigned(v_x, COORD_W);
             end if;
-          elsif v_x = to_integer(r_width)-1 xor s_axis_tlast = '1' then
-            r_err <= '1';
-            r_in_frame <= '0';
-          else
-            r_next_x <= to_unsigned(v_x, COORD_W);
+            out_x <= std_logic_vector(to_unsigned(v_x, COORD_W));
+            out_y <= std_logic_vector(to_unsigned(v_y, COORD_W));
           end if;
-          out_x <= std_logic_vector(to_unsigned(v_x, COORD_W));
-          out_y <= std_logic_vector(to_unsigned(v_y, COORD_W));
         else -- keep state
           r_in_frame <= r_in_frame;
           if r_in_frame = '0' then
