@@ -99,7 +99,6 @@ begin
           r_in_frame <= r_in_frame;
           r_out_data <= r_out_data;
           r_out_eol <= r_out_eol;
-          r_frame_done <= r_frame_done;
           if r_in_frame = '0' then
             r_width <= unsigned(width);
             r_height <= unsigned(height);
