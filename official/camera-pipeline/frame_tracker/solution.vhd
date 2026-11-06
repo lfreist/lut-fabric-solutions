@@ -67,7 +67,7 @@ begin
           r_out_data <= s_axis_tdata(PIX_W-1 downto 0);
           r_out_valid <= '1';
           -- check err conditions
-          err <= '1' when r_in_frame and s_axis_tuser else '0';
+          r_err <= '1' when r_in_frame and s_axis_tuser else '0';
           -- check boundaries
           if s_axis_tuser then -- sending pixel (0, 0)
             r_out_x <= (others => '0');
