@@ -59,17 +59,17 @@ begin
       if not rst then
         if s_axis_tvalid then -- new pulse received
           r_out_data <= s_axis_tdata(PIX_W-1 downto 0);
-          r_err <= '1' when r_in_frame = '1' and s_axis_tuser = '1' else '0';
-          -- check boundaries
-          if s_axis_tuser then -- new frame -> sending pixel (0, 0)
-            v_x := 0;
-            v_y := 0;
-          elsif r_in_frame = '1' then -- keep in frame
-            v_x := to_integer(r_next_x);
-            v_y := to_integer(r_next_y);
-          end if;
-          if r_in_frame = '1' or s_axis_tuser = '1' then
+          if r_in_frame = '1' and s_axis_tuser = '1' then
+            r_err <= '1';
+          elsif r_in_frame = '1' or s_axis_tuser = '1' then
             r_in_frame <= '1';
+            if s_axis_tuser then -- new frame -> sending pixel (0, 0)
+              v_x := 0;
+              v_y := 0;
+            elsif r_in_frame = '1' then -- keep in frame
+              v_x := to_integer(r_next_x);
+              v_y := to_integer(r_next_y);
+            end if;
             if v_x = to_integer(r_width)-1 and s_axis_tlast = '1' then
               r_out_eol <= '1';
               r_next_y <= r_next_y + 1;
