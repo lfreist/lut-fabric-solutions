@@ -79,6 +79,7 @@ begin
               if v_y = to_integer(r_height)-1 then
                 r_frame_done <= '1';
                 r_in_frame <= '0';
+                r_next_y <= (others => '0');
               end if;
             elsif v_x = to_integer(r_width)-1 xor s_axis_tlast = '1' then
               r_err <= '1';
