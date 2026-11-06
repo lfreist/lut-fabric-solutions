@@ -59,6 +59,7 @@ begin
           r_err <= '1' when r_in_frame = '1' and s_axis_tuser = '1' else '0';
           -- check boundaries
           if s_axis_tuser then -- sending pixel (0, 0)
+            r_out_sof <= '1';
             r_out_valid <= '1';
             r_in_frame <= '1';
             r_out_x <= (others => '0');
