@@ -67,6 +67,7 @@ begin
             if s_axis_tuser then -- new frame -> sending pixel (0, 0)
               v_x := 0;
               v_y := 0;
+              r_out_sof <= '1';
             elsif r_in_frame = '1' then -- keep in frame
               v_x := to_integer(r_next_x);
               v_y := to_integer(r_next_y);
