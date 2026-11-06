@@ -44,64 +44,70 @@ architecture rtl of frame_tracker is
 begin
   
   process (clk)
-    variable v_in_frame : boolean := false;
+    variable v_frame_done : boolean := false;
   begin
     if rising_edge(clk) then
-      r_out_valid <= '0';
+      r_in_frame <= '0';
       r_err <= '0';
       r_frame_done <= '0';
-      r_out_sof <= '0';
       r_out_eol <= '0';
-      r_in_frame <= '0';
-      r_out_data <= s_axis_tdata(PIX_W-1 downto 0);
-      if r_in_frame = '0' then
-        r_width <= unsigned(width);
-        r_height <= unsigned(height);
-      end if;
-      v_in_frame := r_in_frame = '1';
-      if rst = '1' then
-      elsif s_axis_tvalid = '1' then
-        if s_axis_tuser = '1' then
-          if v_in_frame then
-            r_err <= '1';
-          end if;
-          r_out_x <= (others => '0');
-          r_out_y <= (others => '0');
-          v_in_frame := true;
-          r_out_sof <= '1';
-          r_out_valid <= '1';
-        end if;
-        if v_in_frame and r_frame_done = '0' then
-          r_out_valid <= '1';
-          if r_out_eol and not s_axis_tuser then
+      r_out_sof <= '0';
+      r_out_valid <= '0';
+      if not rst then
+        if s_axis_tvalid then -- new pulse received
+          r_in_frame <= '1';
+          -- we send a pulse
+          if s_axis_tuser then
             r_out_x <= (others => '0');
-            r_out_y <= r_out_y + 1;
-            if r_out_y = r_height-1 then
-              r_out_y <= (others => '0');
-              r_frame_done <= '1';
-            end if;
-          elsif (s_axis_tlast = '1' and r_out_x < r_width-2) or (s_axis_tlast = '0' and r_out_x = r_width-2 and s_axis_tuser = '0') then
-            r_err <= '1';
-            v_in_frame := false;
-            r_out_valid <= '0';
-          elsif r_in_frame = '1' and s_axis_tuser = '0' then
-            if s_axis_tlast = '1' and r_out_x = r_width-2 then
-              if r_out_y = r_height-1 then
-                r_frame_done <= '1';
-                v_in_frame := false;
-              end if;
-              r_out_eol <= '1';
-            end if;
-            r_out_valid <= '1';
+            r_out_y <= (others => '0');
+            r_out_sof <= '1';
+          else
             r_out_x <= r_out_x + 1;
+            r_out_y <= r_out_y + 1;
+          end if;
+          r_out_data <= s_axis_tdata(PIX_W-1 downto 0);
+          r_out_valid <= '1';
+          -- check err conditions
+          err <= '1' when r_in_frame and s_axis_tuser else '0';
+          -- check boundaries
+          if s_axis_tuser then -- sending pixel (0, 0)
+            r_out_x <= (others => '0');
+            r_out_y <= (others => '0');
+            -- handle width = 1
+            if r_width = 1 and s_axis_tlast = '1' then
+              r_out_eol <= '1';
+              if r_height = 1 then -- end of frame
+                r_frame_done <= '1';
+              else
+                r_out_y <= r_out_y + 1;
+              end if;
+            elsif r_width = 1 xor s_axis_tlast = '1' then
+                r_err <= '1';
+                r_out_valid <= '0';
+                r_in_frame <= '0';
+            end if;
+          else -- r_out_x and r_out_y are legit
+            r_out_x <= r_out_x + 1;
+            if r_out_x = r_width-2 and s_axis_tlast = '1' then -- eol computed and received match
+              r_out_eol <= '1';
+              r_out_y <= r_out_y + 1;
+              if r_out_y = r_height-2 then -- end of frame
+                r_frame_done <= '1';
+              end if;
+            elsif r_out_x = r_width-2 xor s_axis_tlast = '1' then -- eol computed and received do not match
+              r_err <= '1';
+              r_out_valid <= '0';
+              r_in_frame <= '0';
+            end if;
+          end if;
+        else -- keep state
+          r_in_frame <= r_in_frame;
+          r_out_data <= r_out_data;
+          if not r_in_frame then
+            r_width <= unsigned(width);
+            r_height <= unsigned(height);
           end if;
         end if;
-        r_in_frame <= '1' when v_in_frame else '0';
-      else
-        r_out_x <= r_out_x;
-        r_out_y <= r_out_y;
-        r_out_eol <= r_out_eol;
-        r_in_frame <= r_in_frame;
       end if;
     end if;
   end process;
