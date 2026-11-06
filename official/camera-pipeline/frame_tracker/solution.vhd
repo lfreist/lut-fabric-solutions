@@ -83,6 +83,16 @@ begin
             if r_out_eol = '1' then
               r_out_x <= (others => '0');
               r_out_y <= r_out_y + 1;
+            elsif r_width = 1 and s_axis_tlast = '1' then
+              r_out_eol <= '1';
+              if r_height = 1 then -- end of frame
+                r_frame_done <= '1';
+                r_in_frame <= '0';
+              end if;
+            elsif r_width = 1 xor s_axis_tlast = '1' then
+                r_err <= '1';
+                r_out_valid <= '0';
+                r_in_frame <= '0';
             elsif r_out_x = r_width-2 and s_axis_tlast = '1' then -- eol computed and received match
               r_out_eol <= '1';
               if r_out_y = r_height-1 then -- end of frame
