@@ -54,22 +54,13 @@ begin
       r_out_valid <= '0';
       if not rst then
         if s_axis_tvalid then -- new pulse received
-          r_in_frame <= '1';
-          -- we send a pulse
-          if s_axis_tuser then
-            r_out_x <= (others => '0');
-            r_out_y <= (others => '0');
-            r_out_sof <= '1';
-          else
-            r_out_x <= r_out_x + 1;
-            r_out_y <= r_out_y + 1;
-          end if;
           r_out_data <= s_axis_tdata(PIX_W-1 downto 0);
-          r_out_valid <= '1';
           -- check err conditions
           r_err <= '1' when r_in_frame and s_axis_tuser else '0';
           -- check boundaries
           if s_axis_tuser then -- sending pixel (0, 0)
+            r_out_valid <= '1';
+            r_in_frame <= '1';
             r_out_x <= (others => '0');
             r_out_y <= (others => '0');
             -- handle width = 1
@@ -86,6 +77,7 @@ begin
                 r_in_frame <= '0';
             end if;
           elsif r_in_frame then -- r_out_x and r_out_y are legit
+            r_out_valid <= '1';
             r_out_x <= r_out_x + 1;
             if r_out_x = r_width-2 and s_axis_tlast = '1' then -- eol computed and received match
               r_out_eol <= '1';
