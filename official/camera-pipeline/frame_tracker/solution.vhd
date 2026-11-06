@@ -63,6 +63,7 @@ begin
             r_err <= '1';
           elsif r_in_frame = '1' or s_axis_tuser = '1' then
             r_in_frame <= '1';
+            r_out_valid <= '1';
             if s_axis_tuser then -- new frame -> sending pixel (0, 0)
               v_x := 0;
               v_y := 0;
@@ -81,6 +82,7 @@ begin
             elsif v_x = to_integer(r_width)-1 xor s_axis_tlast = '1' then
               r_err <= '1';
               r_in_frame <= '0';
+              r_out_valid <= '0';
             else
               r_next_x <= to_unsigned(v_x, COORD_W);
             end if;
