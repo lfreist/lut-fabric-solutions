@@ -60,9 +60,9 @@ begin
         if s_axis_tvalid then -- new pulse received
           r_out_data <= s_axis_tdata(PIX_W-1 downto 0);
           if r_in_frame = '1' and s_axis_tuser = '1' then
-            r_out_valid <= '1';
             r_err <= '1';
-          elsif r_in_frame = '1' or s_axis_tuser = '1' then
+          end if;
+          if r_in_frame = '1' or s_axis_tuser = '1' then
             r_out_valid <= '1';
             r_in_frame <= '1';
             if s_axis_tuser = '1' then -- new frame -> sending pixel (0, 0)
