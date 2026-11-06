@@ -35,8 +35,8 @@ architecture rtl of frame_tracker is
   signal r_frame_done : std_logic := '0';
   signal r_out_eol : std_logic := '0';
   signal r_out_sof : std_logic := '0';
-  signal r_out_x : unsigned(COORD_W-1 downto 0) := (others => '0');
-  signal r_out_y : unsigned(COORD_W-1 downto 0) := (others => '0');
+  signal r_next_x : unsigned(COORD_W-1 downto 0) := (others => '0');
+  signal r_next_y : unsigned(COORD_W-1 downto 0) := (others => '0');
   signal r_out_data : std_logic_vector(PIX_W-1 downto 0);
   signal r_out_valid : std_logic := '0';
   signal r_width : unsigned(COORD_W-1 downto 0);
@@ -44,6 +44,8 @@ architecture rtl of frame_tracker is
 begin
   
   process (clk)
+    variable v_x : natural := 0;
+    variable v_y : natural := 0;
   begin
     if rising_edge(clk) then
       r_in_frame <= '0';
@@ -52,63 +54,39 @@ begin
       r_out_eol <= '0';
       r_out_sof <= '0';
       r_out_valid <= '0';
+      v_x := 0;
+      v_y := 0;
       if not rst then
         if s_axis_tvalid then -- new pulse received
+          r_in_frame <= '1';
           r_out_data <= s_axis_tdata(PIX_W-1 downto 0);
-          -- check err conditions
           r_err <= '1' when r_in_frame = '1' and s_axis_tuser = '1' else '0';
           -- check boundaries
-          if s_axis_tuser then -- sending pixel (0, 0)
-            r_out_sof <= '1';
-            r_out_valid <= '1';
-            r_in_frame <= '1';
-            r_out_x <= (others => '0');
-            r_out_y <= (others => '0');
-            -- handle width = 1
-            if r_width = 1 and s_axis_tlast = '1' then
-              r_out_eol <= '1';
-              if r_height = 1 then -- end of frame
-                r_frame_done <= '1';
-                r_in_frame <= '0';
-              end if;
-            elsif r_width = 1 xor s_axis_tlast = '1' then
-                r_err <= '1';
-                r_out_valid <= '0';
-                r_in_frame <= '0';
-            end if;
-          elsif r_in_frame = '1' and r_frame_done = '0' then -- r_out_x and r_out_y are legit
-            r_in_frame <= '1';
-            r_out_valid <= '1';
-            r_out_x <= r_out_x + 1;
-            if r_out_eol = '1' then
-              r_out_x <= (others => '0');
-              r_out_y <= r_out_y + 1;
-            elsif r_width = 1 and s_axis_tlast = '1' then
-              r_out_eol <= '1';
-              if r_height = 1 then -- end of frame
-                r_frame_done <= '1';
-                r_in_frame <= '0';
-              end if;
-            elsif r_width = 1 xor s_axis_tlast = '1' then
-                r_err <= '1';
-                r_out_valid <= '0';
-                r_in_frame <= '0';
-            elsif r_out_x = r_width-2 and s_axis_tlast = '1' then -- eol computed and received match
-              r_out_eol <= '1';
-              if r_out_y = r_height-1 then -- end of frame
-                r_frame_done <= '1';
-                r_in_frame <= '0';
-              end if;
-            elsif r_out_x = r_width-2 xor s_axis_tlast = '1' then -- eol computed and received do not match
-              r_err <= '1';
-              r_out_valid <= '0';
+          if s_axis_tuser then -- new frame -> sending pixel (0, 0)
+            v_x := 0;
+            v_y := 0;
+          elsif r_in_frame = '1' then -- keep in frame
+            v_x := to_integer(r_next_x);
+            v_y := to_integer(r_next_y);
+          end if;
+          if v_x = to_integer(r_width)-1 and s_axis_tlast = '1' then
+            r_out_eol <= '1';
+            r_next_y <= r_next_y + 1;
+            r_next_x <= (others => '0');
+            if v_y = to_integer(r_height)-1 then
+              r_frame_done <= '1';
               r_in_frame <= '0';
             end if;
+          elsif v_x = to_integer(r_width)-1 xor s_axis_tlast = '1' then
+            r_err <= '1';
+            r_in_frame <= '0';
+          else
+            r_next_x <= to_unsigned(v_x, COORD_W);
           end if;
+          out_x <= std_logic_vector(to_unsigned(v_x, COORD_W));
+          out_y <= std_logic_vector(to_unsigned(v_y, COORD_W));
         else -- keep state
           r_in_frame <= r_in_frame;
-          r_out_data <= r_out_data;
-          r_out_eol <= r_out_eol;
           if r_in_frame = '0' then
             r_width <= unsigned(width);
             r_height <= unsigned(height);
@@ -124,8 +102,6 @@ begin
   out_data <= r_out_data;
   out_eol <= r_out_eol;
   out_sof <= r_out_sof;
-  out_x <= std_logic_vector(r_out_x);
-  out_y <= std_logic_vector(r_out_y);
   out_valid <= r_out_valid;
 
 end architecture rtl;
