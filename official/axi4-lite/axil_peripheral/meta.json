@@ -1,0 +1,19 @@
+{
+  "state": "passed",
+  "submitted_at": "2026-10-24T09:07:40+00:00",
+  "tree_hash": "b7bd7967c6606f8a5a062f7003f9d5b13e210558",
+  "source_commit": null,
+  "entity": "axil_peripheral",
+  "language": "vhdl",
+  "dep_mode": "own",
+  "accepted": {
+    "blob": "f825fe5f62cc0859939cd01dabd2ea878ced9840",
+    "tree_hash": "b7bd7967c6606f8a5a062f7003f9d5b13e210558",
+    "source_commit": null,
+    "dep_mode": "own",
+    "first_accepted_at": "2026-10-24T09:05:16+00:00",
+    "accepted_at": "2026-10-24T09:07:40+00:00",
+    "revision": 3,
+    "sim_time": "500 us"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "state": "passed",
+  "submitted_at": "2026-10-23T16:54:41+00:00",
+  "tree_hash": "e31d6b4f4acf67219992cb6128aff2dfe6aa6160",
+  "source_commit": null,
+  "entity": "vr_register",
+  "language": "vhdl",
+  "dep_mode": "own",
+  "accepted": {
+    "blob": "a85486801bd1db7e34b442413913ad7095c13ca8",
+    "tree_hash": "e31d6b4f4acf67219992cb6128aff2dfe6aa6160",
+    "source_commit": null,
+    "dep_mode": "own",
+    "first_accepted_at": "2026-10-23T10:09:13+00:00",
+    "accepted_at": "2026-10-23T16:54:41+00:00",
+    "revision": 6,
+    "sim_time": "100 us"
+  }
+}
