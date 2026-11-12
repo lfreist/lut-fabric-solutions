@@ -23,7 +23,7 @@ begin
   begin
     if rising_edge(clk) then
       prev <= d;
-      sync_regs <= sync_regs(STAGES-2 downto 0) & d;
+      sync_regs <= sync_regs(STAGES-1 downto 0) & d;
       if nor sync_regs then
         q <= '0';
       elsif and sync_regs then
