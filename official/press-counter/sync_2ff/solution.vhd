@@ -26,8 +26,6 @@ begin
       sync_regs <= sync_regs & d;
       if nor sync_regs then
         q <= '0';
-      elsif and sync_regs then
-        q <= '1';
       end if;
     end if;
   end process;
