@@ -14,7 +14,7 @@ entity sync_2ff is
 end entity sync_2ff;
 
 architecture rtl of sync_2ff is
-  signal sync_regs : unsigned(4 downto 0) := (others => '0');
+  signal sync_regs : std_logic_vector(STAGES-1 downto 0) := (others => '0');
   signal prev : std_logic := '0';
   attribute ASYNC_REG : string;
   attribute ASYNC_REG of sync_regs : signal is "TRUE";
@@ -23,13 +23,11 @@ begin
   begin
     if rising_edge(clk) then
       prev <= d;
-      sync_regs <= sync_regs + 1;
-      if sync_regs > 0 and prev /= d then
-        sync_regs <= (others => '0');
-      end if;
-      if sync_regs >= STAGES - 1 then 
-        sync_regs <= (others => '0');
-        q <= prev;
+      sync_regs <= sync_regs & d;
+      if nor sync_regs then
+        q <= '0';
+      elsif and sync_regs then
+        q <= '1';
       end if;
     end if;
   end process;
