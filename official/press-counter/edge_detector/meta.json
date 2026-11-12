@@ -1,10 +1,19 @@
 {
-  "state": "failed",
-  "submitted_at": "2026-11-12T13:18:03+00:00",
+  "state": "passed",
+  "submitted_at": "2026-11-12T13:18:28+00:00",
   "tree_hash": "2fe167b748c8a36d822dcba3bd1f5cda53c0a094",
   "source_commit": null,
   "entity": "edge_detector",
   "language": "vhdl",
   "dep_mode": "own",
-  "accepted": null
+  "accepted": {
+    "blob": "0fd426b754f89154e8e193bca96e8cee88fe217e",
+    "tree_hash": "2fe167b748c8a36d822dcba3bd1f5cda53c0a094",
+    "source_commit": null,
+    "dep_mode": "own",
+    "first_accepted_at": "2026-11-12T13:18:28+00:00",
+    "accepted_at": "2026-11-12T13:18:28+00:00",
+    "revision": 1,
+    "sim_time": "20 us"
+  }
 }

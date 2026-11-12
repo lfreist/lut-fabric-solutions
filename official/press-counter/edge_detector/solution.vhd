@@ -24,7 +24,7 @@ begin
         prev <= '0';
       else
         prev <= d;
-        if prev = d then
+        if prev /= d then
           rise <= d;
           fall <= not d;
         end if;
