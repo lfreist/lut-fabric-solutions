@@ -24,10 +24,8 @@ begin
         prev <= '0';
       else
         prev <= d;
-        if prev /= d then
-          rise <= d;
-          fall <= not d;
-        end if;
+        rise <= '1' when d = '1' and prev = '0';
+        fall <= '1' when d = '0' and prev = '1';
       end if;
     end if;
   end process;
