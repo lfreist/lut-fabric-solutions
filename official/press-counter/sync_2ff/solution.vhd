@@ -26,7 +26,7 @@ begin
       sync_regs <= sync_regs(STAGES-2 downto 0) & d;
       if nor sync_regs then
         q <= '0';
-      elsif or sync_regs then
+      elsif and sync_regs then
         q <= '1';
       end if;
     end if;
