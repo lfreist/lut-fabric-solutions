@@ -13,7 +13,7 @@ entity edge_detector is
 end entity edge_detector;
 
 architecture rtl of edge_detector is
-  signal prev : std_logic := '0';
+  signal prev : std_logic;
 begin
   process (clk)
   begin
