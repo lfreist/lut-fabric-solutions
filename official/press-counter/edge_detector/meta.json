@@ -1,6 +1,6 @@
 {
   "state": "passed",
-  "submitted_at": "2026-11-12T13:18:33+00:00",
+  "submitted_at": "2026-11-12T13:18:34+00:00",
   "tree_hash": "2fe167b748c8a36d822dcba3bd1f5cda53c0a094",
   "source_commit": null,
   "entity": "edge_detector",
@@ -12,8 +12,8 @@
     "source_commit": null,
     "dep_mode": "own",
     "first_accepted_at": "2026-11-12T13:18:28+00:00",
-    "accepted_at": "2026-11-12T13:18:33+00:00",
-    "revision": 2,
+    "accepted_at": "2026-11-12T13:18:34+00:00",
+    "revision": 3,
     "sim_time": "20 us"
   }
 }
