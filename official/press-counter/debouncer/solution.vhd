@@ -35,7 +35,7 @@ begin
           cnt <= cnt + 1;
           if cnt = STABLE_CYCLES-1 then
             cnt <= 0;
-            btn_out <= btn_in;
+            btn_out <= synced;
           end if;
         else
           cnt <= 0;
