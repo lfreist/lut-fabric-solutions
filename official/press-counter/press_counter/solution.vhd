@@ -17,13 +17,17 @@ end entity press_counter;
 
 architecture rtl of press_counter is
   signal debounced : std_logic;
+  signal rising : std_logic;
 begin
   u_deb : entity work.debouncer
     generic map (STABLE_CYCLES => DEBOUNCE_CYCLES)
     port map (clk => clk, rst => rst, btn_in => btn, btn_out => debounced);
 
+  u_edge : entity work.edge_detector
+    port map (clk => clk, rst => rst, d => debounced, rise => rising, fall => open);
+
   u_cnt : entity work.counter
     generic map (WIDTH => LED_WIDTH)
-    port map (clk => clk, rst => rst, en => '1', count => leds);
-    
+    port map (clk => clk, rst => rst, en => rising, count => leds);
+
 end architecture rtl;
