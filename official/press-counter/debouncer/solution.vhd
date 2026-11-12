@@ -28,6 +28,7 @@ begin
     if rising_edge(clk) then
       if rst = '1' then
         cnt <= 0;
+        btn_out <= '0';
       else
         prev <= synced;
         if prev = synced then
