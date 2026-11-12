@@ -1,0 +1,10 @@
+{
+  "state": "failed",
+  "submitted_at": "2026-11-12T13:36:45+00:00",
+  "tree_hash": "29e73c194e6b291acb08d5fb1a9adbdba55d64cd",
+  "source_commit": null,
+  "entity": "debouncer",
+  "language": "vhdl",
+  "dep_mode": "own",
+  "accepted": null
+}
