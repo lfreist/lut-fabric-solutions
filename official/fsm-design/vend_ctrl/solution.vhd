@@ -59,6 +59,7 @@ begin
               if cancel = '1' then
                 if full_credit > 0 then
                   change_valid <= '1';
+                  change <= std_logic_vector(to_unsigned(full_credit, change'length));
                 end if;
                 r_credit <= (others => '0');
               end if;
