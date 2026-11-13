@@ -49,24 +49,22 @@ begin
       else
         case state is
             when S_COLLECT =>
-              if full_credit >= PRICE then
-                r_change <= to_unsigned(full_credit - PRICE, change'length);
-                change_valid <= '1' when full_credit > PRICE else '0';
-                vend <= '1';
-                r_credit <= (others => '0');
-              else
-                r_credit <= to_unsigned(full_credit, r_credit'length);
-              end if;
               if cancel = '1' then
                 if full_credit > 0 then
                   change_valid <= '1';
                   r_change <= to_unsigned(full_credit, change'length);
                 end if;
                 r_credit <= (others => '0');
-              end if;
-              if free_vend = '1' then
+              elsif full_credit >= PRICE then
+                r_change <= to_unsigned(full_credit - PRICE, change'length);
+                change_valid <= '1' when full_credit > PRICE else '0';
+                vend <= '1';
+                r_credit <= (others => '0');
+              elsif free_vend = '1' then
                 vend <= '1';
                 state <= S_WAIT;
+              else
+                r_credit <= to_unsigned(full_credit, r_credit'length);
               end if;
 
             when S_WAIT =>
