@@ -62,6 +62,7 @@ begin
                 r_credit <= (others => '0');
               elsif free_vend = '1' then
                 vend <= '1';
+                r_credit <= to_unsigned(full_credit, r_credit'length);
                 state <= S_WAIT;
               else
                 r_credit <= to_unsigned(full_credit, r_credit'length);
