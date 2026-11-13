@@ -27,6 +27,7 @@ architecture rtl of vend_ctrl is
   type state_t is (S_COLLECT, S_WAIT);
   signal state : state_t := S_COLLECT;
   signal r_credit : unsigned(WIDTH-1 downto 0) := (others => '0');
+  signal r_change : unsigned(WIDTH-1 downto 0) := (others => '0');
 begin
 
   process (clk)
@@ -36,7 +37,7 @@ begin
     if rising_edge(clk) then
       vend <= '0';
       change_valid <= '0';
-      change <= (others => '0');
+      r_change <= (others => '0');
       inserted := 0;
       if coin_10 = '1' then inserted := inserted + 10; end if;
       if coin_20 = '1' then inserted := inserted + 20; end if;
@@ -49,7 +50,7 @@ begin
         case state is
             when S_COLLECT =>
               if full_credit >= PRICE then
-                change <= std_logic_vector(to_unsigned(full_credit - PRICE, change'length));
+                r_change <= to_unsigned(full_credit - PRICE, change'length);
                 change_valid <= '1' when full_credit > PRICE else '0';
                 vend <= '1';
                 r_credit <= (others => '0');
@@ -59,7 +60,7 @@ begin
               if cancel = '1' then
                 if full_credit > 0 then
                   change_valid <= '1';
-                  change <= std_logic_vector(to_unsigned(full_credit, change'length));
+                  r_change <= to_unsigned(full_credit, change'length);
                 end if;
                 r_credit <= (others => '0');
               end if;
@@ -70,9 +71,8 @@ begin
 
             when S_WAIT =>
               if inserted > 0 then
-                change <= std_logic_vector(r_credit);
+                r_change <= to_unsigned(inserted, change'length);
                 change_valid <= '1' when full_credit > 0 else '0';
-                r_credit <= (others => '0');
               end if;
               state <= S_COLLECT when vend_done = '1' else S_WAIT;
 
@@ -82,5 +82,6 @@ begin
   end process;
 
   credit <= std_logic_vector(r_credit);
+  change <= std_logic_vector(r_change);
 
 end architecture rtl;
