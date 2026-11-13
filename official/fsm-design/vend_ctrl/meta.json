@@ -1,10 +1,19 @@
 {
-  "state": "failed",
-  "submitted_at": "2026-11-13T13:08:10+00:00",
+  "state": "passed",
+  "submitted_at": "2026-11-13T13:10:18+00:00",
   "tree_hash": "c6f0f313a7f7a4b9fe4fc7fb18207484350b7771",
   "source_commit": null,
   "entity": "vend_ctrl",
   "language": "vhdl",
   "dep_mode": "own",
-  "accepted": null
+  "accepted": {
+    "blob": "4d11eabf30ec753a591a8a104138e3690adbbc46",
+    "tree_hash": "c6f0f313a7f7a4b9fe4fc7fb18207484350b7771",
+    "source_commit": null,
+    "dep_mode": "own",
+    "first_accepted_at": "2026-11-13T13:10:18+00:00",
+    "accepted_at": "2026-11-13T13:10:18+00:00",
+    "revision": 1,
+    "sim_time": "100 us"
+  }
 }

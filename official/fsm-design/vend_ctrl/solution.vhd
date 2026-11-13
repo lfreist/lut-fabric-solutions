@@ -60,6 +60,7 @@ begin
                 change_valid <= '1' when full_credit > PRICE else '0';
                 vend <= '1';
                 r_credit <= (others => '0');
+                state <= S_WAIT;
               elsif free_vend = '1' then
                 vend <= '1';
                 r_credit <= to_unsigned(full_credit, r_credit'length);
