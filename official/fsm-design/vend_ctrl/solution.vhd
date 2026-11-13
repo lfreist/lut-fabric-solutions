@@ -37,7 +37,6 @@ begin
     if rising_edge(clk) then
       vend <= '0';
       change_valid <= '0';
-      r_change <= (others => '0');
       inserted := 0;
       if coin_10 = '1' then inserted := inserted + 10; end if;
       if coin_20 = '1' then inserted := inserted + 20; end if;
@@ -46,6 +45,7 @@ begin
       if rst = '1' then
         r_credit <= (others => '0');
         state <= S_COLLECT;
+        r_change <= (others => '0');
       else
         case state is
             when S_COLLECT =>
